@@ -5,13 +5,14 @@ pipeline {
             steps {
                 echo "Retrieving source code from the directory specified by the environment variable."
                 echo "Compiling the code and creating necessary artifacts."
-                echo "Done"
+                
             }
         }
         stage('Unit and Integration Tests') {
             steps {
                 echo "Executing unit tests."
                 echo "Executing integration tests."
+                echo "Done"
             }
         }
         stage('Code Analysis') {
