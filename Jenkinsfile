@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Executing unit tests."
                 echo "Executing integration tests."
-                echo "done"
+              
             }
         }
         stage('Code Analysis') {
