@@ -3,9 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Retrieving source code from the directory path set in the environment variable."
-                echo "Building the code and producing required artifacts."
-                echo "Done"
+                echo "Retrieving source code from the directory specified by the environment variable."
+                echo "Compiling the code and creating necessary artifacts."
             }
         }
         stage('Unit and Integration Tests') {
@@ -14,46 +13,45 @@ pipeline {
                 echo "Executing integration tests."
             }
         }
-
-        stage('Code Quality Check') {
+        stage('Code Analysis') {
             steps {
-                echo "Analyzing code quality using a code analysis tool."
+                echo "Evaluating code quality using a code analysis tool."
             }
         }
-
-        stage('Security Assessment') {
+        stage('Security Scan') {
             steps {
-                echo "Scanning for vulnerabilities with a security tool."
+                echo "Detecting vulnerabilities using a security scanning tool."
             }
         }
-
-        stage('Staging Integration Tests') {
+        stage('Integration Tests on Staging') {
             steps {
-                echo "Performing integration tests in the staging environment."
+                echo "Conducting integration tests in the staging environment."
             }
         }
-
-        stage('Production Deployment') {
+        stage('Deploy to Production') {
             steps {
-                echo "Deploying the application to the production environment."
+                echo "Releasing the code to the production environment."
             }
         }
     }
-
     post {
         success {
-            emailext attachLog: true,
-            compressLog: true,
-            to: 'virajprajapati14364@gmail.com',
-            body: "The log is available at $JENKINS_HOME/jobs/$JOB_NAME/builds/lastSuccessfulBuild/log",
-            subject: "Production Deployment Successful - Jenkins"
+            emailext(
+                attachLog: true,
+                compressLog: true,
+                to: 'virajprajapati14364@gmail.com',
+                body: "The log is available at \$JENKINS_HOME/jobs/\$JOB_NAME/builds/lastSuccessfulBuild/log",
+                subject: 'Production Deployment Successful - Jenkins'
+            )
         }
         failure {
-            emailext attachLog: true,
-            compressLog: true,
-            to: 'virajprajapati14364@gmail.com',
-            body: "The log is available at $JENKINS_HOME/jobs/$JOB_NAME/builds/lastSuccessfulBuild/log",
-            subject: "Production Deployment Failed - Jenkins"
+            emailext(
+                attachLog: true,
+                compressLog: true,
+                to: 'virajprajapati14364@gmail.com',
+                body: "The log is available at \$JENKINS_HOME/jobs/\$JOB_NAME/builds/lastSuccessfulBuild/log",
+                subject: "Production Deployment Failed - Jenkins"
+            )
         }
     }
 }
