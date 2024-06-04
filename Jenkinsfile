@@ -5,6 +5,7 @@ pipeline {
             steps {
                 echo "Retrieving source code from the directory path set in the environment variable."
                 echo "Building the code and producing required artifacts."
+                echo "Done"
             }
         }
         stage('Unit and Integration Tests') {
